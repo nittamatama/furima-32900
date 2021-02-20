@@ -21,12 +21,12 @@
 
 | Column        | Type          | Options     |
 | ------        | ------        | ----------- |
-| phone_number  | string        | null: false |
+| product       | references    | null: false, foreign_key: true |
 | user          | references    | null: false, foreign_key:true |
 
 ## Association
 
-- belongs_to :address
+- has_one :address
   belongs_to :user
   belongs_to :product
 
@@ -40,7 +40,7 @@
 | description   | text       | null: false                    |
 | selling_price | integer     | null: false                    |
 | user          | references | null: false, foreign_key:true  |
-| category      | integer    | null: false                    |
+| category_id      | integer    | null: false                    |
 | condition_id     | integer    | null: false                    |
 | delivery_fee_id  | integer    | null: false                    |
 | delivery_area_id | integer    | null: false                    |
@@ -54,12 +54,13 @@
 
 #### address テーブル
 
-| postal_code   | integer        | null: false |
+| postal_code   | integer       | null: false |
 | city          | string        | null: false |
 | address       | string        | null: false |
 | building_name | string        |             |
-| prefecture    | integer       | null: false |
+| prefecture_id | integer       | null: false |
+| phone_number  | integer       | null: false |
 
 #### Association
 
-has_many :purchase
+belongs_to :purchase
