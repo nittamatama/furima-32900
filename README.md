@@ -1,15 +1,15 @@
 # users テーブル
 
-| Column    | Type   | Options     |
-| --------  | ------ | ----------- |
-| first_name| string | null: false |
-| last_name | string | null: false |
-| email     | string | null: false, unique: true |
-| encrypted_password  | string | null: false |
-| nickname  | string | null: false |
-| first_kana | string | null: false |
-| last_kana | string | null: false |
-| birthday  | date   | null: false |
+| Column             | Type   | Options                   |
+| ------------------ | ------ | ------------------------- |
+| first_name         | string | null: false               |
+| last_name          | string | null: false               |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
+| nickname           | string | null: false               |
+| first_kana         | string | null: false               |
+| last_kana          | string | null: false               |
+| birthday           | date   | null: false               |
 
 # Association
 
@@ -19,10 +19,10 @@
 
 ## purchases テーブル
 
-| Column        | Type          | Options     |
-| ------        | ------        | ----------- |
+| Column        | Type          | Options                        |
+| ------------- | ------------- | -----------                    |
 | product       | references    | null: false, foreign_key: true |
-| user          | references    | null: false, foreign_key:true |
+| user          | references    | null: false, foreign_key:true  |
 
 ## Association
 
@@ -32,19 +32,19 @@
 
 
 
-## products テーブル
+### products テーブル
 
-| Column        | Type       | Options                        |
-| ------        | ---------- | ------------------------------ |
-| product_name  | string     | null: false                    |
-| description   | text       | null: false                    |
-| selling_price | integer     | null: false                    |
-| user          | references | null: false, foreign_key:true  |
-| category_id      | integer    | null: false                    |
-| condition_id     | integer    | null: false                    |
-| delivery_fee_id  | integer    | null: false                    |
-| prefecture_id | integer    | null: false                    |
-| delivery_period_id| integer   | null: false                    |
+| Column             | Type        | Options                       |
+| ------------------ | ----------  | ------------------------------|
+| product_name       | string      | null: false                   |
+| description        | text        | null: false                   |
+| selling_price      | integer     | null: false                   |
+| user               | references  | null: false, foreign_key:true |
+| category_id        | integer     | null: false                   |
+| condition_id       | integer     | null: false                   |
+| delivery_fee_id    | integer     | null: false                   |
+| prefecture_id      | integer     | null: false                   |
+| delivery_period_id | integer     | null: false                   |
 
 ### Association
 
@@ -54,12 +54,12 @@
 
 #### addresses テーブル
 
-| postal_code   | string        | null: false |
-| city          | string        | null: false |
-| address       | string        | null: false |
-| building_name | string        |             |
-| prefecture_id | integer       | null: false |
-| phone_number  | integer       | null: false |
+| postal_code   | string        | null: false                    |
+| city          | string        | null: false                    |
+| address       | string        | null: false                    | 
+| building_name | string        |                                |
+| prefecture_id | integer       | null: false                    |
+| phone_number  | integer       | null: false                    |
 | purchase      | references    | null: false, foreign_key: true |
 
 #### Association
