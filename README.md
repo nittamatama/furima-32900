@@ -4,7 +4,7 @@
 | --------  | ------ | ----------- |
 | first_name| string | null: false |
 | last_name | string | null: false |
-| email     | string | null: false, unique |
+| email     | string | null: false, unique: true |
 | encrypted_password  | string | null: false |
 | nickname  | string | null: false |
 | first_kana | string | null: false |
@@ -43,7 +43,7 @@
 | category_id      | integer    | null: false                    |
 | condition_id     | integer    | null: false                    |
 | delivery_fee_id  | integer    | null: false                    |
-| delivery_area_id | integer    | null: false                    |
+| prefecture_id | integer    | null: false                    |
 | delivery_period_id| integer   | null: false                    |
 
 ### Association
@@ -52,9 +52,9 @@
 - has_one :purchase
 
 
-#### address テーブル
+#### addresses テーブル
 
-| postal_code   | integer       | null: false |
+| postal_code   | string        | null: false |
 | city          | string        | null: false |
 | address       | string        | null: false |
 | building_name | string        |             |
