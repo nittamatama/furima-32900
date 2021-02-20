@@ -1,4 +1,4 @@
-## users テーブル
+# users テーブル
 
 | Column    | Type   | Options     |
 | --------  | ------ | ----------- |
@@ -11,28 +11,26 @@
 | last_kana | string | null: false |
 | birthday  | date   | null: false |
 
-### Association
+# Association
 
-- has_many :purchase
+- has_many :purchases
 - has_many :products
 
 
-## purchase テーブル
+## purchases テーブル
 
 | Column        | Type          | Options     |
 | ------        | ------        | ----------- |
-| postal_code   | string        | null: false |
-| city          | string        | null: false |
-| address       | string        | null: false |
-| building_name | string        |             |
 | phone_number  | string        | null: false |
 | user          | references    | null: false, foreign_key:true |
-| prefecture    | integer       | null: false |
 
-### Association
+## Association
 
-- has_many :users
-- belongs_to :products
+- belongs_to :address
+  belongs_to :user
+  belongs_to :product
+
+
 
 ## products テーブル
 
@@ -40,15 +38,28 @@
 | ------        | ---------- | ------------------------------ |
 | product_name  | string     | null: false                    |
 | description   | text       | null: false                    |
-| selling_price | string     | null: false                    |
+| selling_price | integer     | null: false                    |
 | user          | references | null: false, foreign_key:true  |
 | category      | integer    | null: false                    |
-| condition     | integer    | null: false                    |
-| delivery_fee  | integer    | null: false                    |
-| delivery_area | integer    | null: false                    |
-| delivery_period| integer   | null: false                    |
+| condition_id     | integer    | null: false                    |
+| delivery_fee_id  | integer    | null: false                    |
+| delivery_area_id | integer    | null: false                    |
+| delivery_period_id| integer   | null: false                    |
 
 ### Association
 
-- belongs_to :users
+- belongs_to :user
 - has_one :purchase
+
+
+#### address テーブル
+
+| postal_code   | integer        | null: false |
+| city          | string        | null: false |
+| address       | string        | null: false |
+| building_name | string        |             |
+| prefecture    | integer       | null: false |
+
+#### Association
+
+has_many :purchase
