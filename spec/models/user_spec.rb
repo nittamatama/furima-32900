@@ -114,6 +114,16 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("First kanaには全角カタカナを使用してください")
     end
+    it 'last_kanaはカタカナ以外の全角文字では登録できない' do
+      @user.last_kana = 'ああああ'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Last kanaには全角カタカナを使用してください")
+    end
+    it 'first_kanaはカタカナ以外の全角文字では登録できない' do
+      @user.first_kana = 'ああああ'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First kanaには全角カタカナを使用してください")
+    end
     it 'birthdayが空だと登録できない' do
     @user.birthday = ''
     @user.valid?
