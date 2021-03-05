@@ -7,9 +7,9 @@ class Product < ApplicationRecord
   belongs_to :category, :condition, :delivery_fee, :prefecture, :delivery_period
 
   with_options presence: true do
-    validates :product_name
-    validates :description
-    validates :selling_price
+    validates :product_name, length: { maximum: 40 }
+    validates :description, length: { maximum: 1000 }
+    validates :selling_price, inclusion: {in:300..9999999}
     validates :category_id
     validates :condition_id
     validates :delivery_fee_id
@@ -26,5 +26,4 @@ class Product < ApplicationRecord
   
   validates :prefecture_id, numericality: { other_than: 0 }
   validates :selling_price, format: { with: /\A[0-9]+\z/, message: "は半角数字で入力してください" }
-  validates :selling_price, inclusion: {in:300..9999999}
 end
