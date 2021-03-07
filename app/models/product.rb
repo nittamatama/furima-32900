@@ -14,6 +14,7 @@ class Product < ApplicationRecord
     validates :product_name, length: { maximum: 40 }
     validates :description, length: { maximum: 1000 }
     validates :selling_price, inclusion: {in:300..9999999}
+    validates :image
   end
 
 

@@ -68,7 +68,7 @@ RSpec.describe Product, type: :model do
       expect(@product.errors.full_messages).to include("Selling priceは一覧にありません")
     end
     it 'selling_priceが9,999,999円以上だと登録できない' do
-      @product.selling_price = '100000000'
+      @product.selling_price = 100000000
       @product.valid?
       expect(@product.errors.full_messages).to include("Selling priceは一覧にありません")
     end
@@ -76,6 +76,21 @@ RSpec.describe Product, type: :model do
       @product.selling_price = '１１１１１１１'
       @product.valid?
       expect(@product.errors.full_messages).to include("Selling priceは一覧にありません")
+     end
+     it 'selling_priceは英数混合では登録できない' do
+       @product.selling_price = 'aaa123'
+       @product.valid?
+       expect(@product.errors.full_messages).to include("Selling priceは一覧にありません")
+     end
+     it 'selling_priceは半角英語のみでは登録できない' do
+       @product.selling_price = 'aaa'
+       @product.valid?
+       expect(@product.errors.full_messages).to include("Selling priceは一覧にありません")
+     end
+     it '画像が空だと投稿できない' do
+       @product.image = nil
+       @product.valid?
+       expect(@product.errors.full_messages).to include("Imageを入力してください")
      end
    end
  end
