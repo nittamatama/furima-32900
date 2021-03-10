@@ -19,7 +19,7 @@
         <%= "¥ #{@product.selling_price}" %>
       </span>
       <span class="item-postage">
-        <%= "配送料負担" %>
+        <%= @product.delivery_fee.name %>
       </span>
     </div>
 
