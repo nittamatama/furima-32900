@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :move_to_index, only: :edit
 
   def index
     @products = Product.all.order(created_at: :DESC)
@@ -39,5 +40,12 @@ class ProductsController < ApplicationController
 
   def product_params
     params.require(:product).permit(:product_name, :description, :selling_price, :category_id, :condition_id, :delivery_fee_id, :delivery_period_id, :prefecture_id, :image).merge(user_id: current_user.id)
+  end
+
+  def move_to_index
+    product = Product.find(params[:id])
+      if product.user_id != current_user.id
+      redirect_to action: :index
+    end
   end
 end
