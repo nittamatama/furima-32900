@@ -1,6 +1,6 @@
 class AddressPurchase
   include ActiveModel::Model
-  attr_accessor :postal_code, :city, :address, :building_name, :prefecture_id, :phone_number, :purchase_id, :user_id, :product_id
+  attr_accessor :postal_code, :city, :address, :building_name, :prefecture_id, :phone_number, :purchase_id, :user_id, :product_id, :purchase_id
 
   with_options presence: true do
     validates :postal_code, format: { with: /\A\d{3}[-]\d{4}\z/, message: "郵便番号にはハイフンを入れてください"}
@@ -11,8 +11,7 @@ class AddressPurchase
   end
 
   def save
-    binding.pry
-    Address.create(postal_code: postal_code, city: city, address: address, building_name: building_name, prefecture_id: prefecture_id, phone_number: phone_number, purchase_id: purchase_id)
-    Purchase.create(user_id: user_id, product_id: product_id)
+    purchase = Purchase.create(user_id: user_id, product_id: product_id)
+    Address.create(postal_code: postal_code, city: city, address: address, building_name: building_name, prefecture_id: prefecture_id, phone_number: phone_number, purchase_id: purchase.id)
   end
 end
