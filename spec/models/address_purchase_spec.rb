@@ -10,6 +10,9 @@ RSpec.describe AddressPurchase, type: :model do
       it 'postal_code, city, address, prefecture_id, phone_numberが存在すれば登録できる' do
       expect(@address).to be_valid
     end
+    it "selling_priceとtokenがあれば保存できる" do
+      expect(@address).to be_valid
+    end
   end
 
     context '商品出品がうまくいかないとき' do
@@ -42,6 +45,11 @@ RSpec.describe AddressPurchase, type: :model do
         @address.phone_number = '080-8161-1279'
         @address.valid?
         expect(@address.errors.full_messages).to include('Phone number電話番号にはハイフンを入れないでください')
+      end
+      it 'tokenが空では登録できないこと' do
+        @address.token = ''
+        @address.valid?
+        expect(@address.errors.full_messages).to include("Tokenを入力してください")
       end
     end
   end

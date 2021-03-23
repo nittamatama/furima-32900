@@ -5,5 +5,6 @@ FactoryBot.define do
     address       {'牟礼'}
     prefecture_id { 1 }
     phone_number  { '08081611279' }
+    token         {"tok_abcdefghijk00000000000000000"}
   end
 end

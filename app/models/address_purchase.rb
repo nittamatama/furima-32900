@@ -1,6 +1,6 @@
 class AddressPurchase
   include ActiveModel::Model
-  attr_accessor :postal_code, :city, :address, :building_name, :prefecture_id, :phone_number, :purchase_id, :user_id, :product_id, :purchase_id
+  attr_accessor :postal_code, :city, :address, :building_name, :prefecture_id, :phone_number, :purchase_id, :user_id, :product_id, :purchase_id, :token
 
   with_options presence: true do
     validates :postal_code, format: { with: /\A\d{3}[-]\d{4}\z/, message: "郵便番号にはハイフンを入れてください"}
@@ -8,6 +8,7 @@ class AddressPurchase
     validates :address
     validates :prefecture_id
     validates :phone_number, format: { with: /\A\d{11}\z/, message: "電話番号にはハイフンを入れないでください"}
+    validates :token
   end
 
   def save
