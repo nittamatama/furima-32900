@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe AddressPurchase, type: :model do
   before do
     @address = FactoryBot.build(:address_purchase)
+    sleep(1)
   end
 
   describe '商品購入' do
@@ -25,7 +26,7 @@ RSpec.describe AddressPurchase, type: :model do
       it 'postal_codeにハイフンがないと登録できない' do
         @address.postal_code = '1810002'
         @address.valid?
-        expect(@address.errors.full_messages).to include('Postal code郵便番号にはハイフンを入れてください')
+        expect(@address.errors.full_messages).to include('Postal codeにはハイフンを入れてください')
       end
       it 'cityが空だと登録できない' do
         @address.city = ''
@@ -45,7 +46,7 @@ RSpec.describe AddressPurchase, type: :model do
       it 'phone_numberにハイフンが入っていたら登録できない' do
         @address.phone_number = '080-8161-1279'
         @address.valid?
-        expect(@address.errors.full_messages).to include('Phone number電話番号にはハイフンを入れないでください')
+        expect(@address.errors.full_messages).to include('Phone numberにはハイフンを入れないでください')
       end
       it 'tokenが空では登録できないこと' do
         @address.token = ''
@@ -62,6 +63,21 @@ RSpec.describe AddressPurchase, type: :model do
         @address.valid?
         expect(@address.errors.full_messages).to include("Productを入力してください")
       end 
+      it 'prefecture_idは0では登録できない' do
+        @address.prefecture_id = 0
+        @address.valid?
+        expect(@address.errors.full_messages).to include("Prefectureを入力してください")
+      end
+      it '電話番号は12桁以上では登録できない' do
+        @address.phone_number = '0000000000000'
+        @address.valid?
+        expect(@address.errors.full_messages).to include("Phone numberにはハイフンを入れないでください")
+      end
+      it '電話番号は英数混合では登録できない' do
+        @address.phone_number = 'aaa00000'
+        @address.valid?
+        expect(@address.errors.full_messages).to include("Phone numberにはハイフンを入れないでください")
+      end
     end
   end
 end
