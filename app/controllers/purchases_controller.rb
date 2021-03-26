@@ -1,16 +1,14 @@
 class PurchasesController < ApplicationController
   before_action :authenticate_user!, only: :index
   before_action :move_to_index, only: [:index, :create]
+  before_action :same_method, only: [:index, :create]
   
   def index
     @address_purchase = AddressPurchase.new
-    @product = Product.find(params[:product_id])
   end
   
   def create
-    
     @address_purchase = AddressPurchase.new(address_params)
-    @product = Product.find(params[:product_id])
     if @address_purchase.valid?
        pay_item
        @address_purchase.save
@@ -32,6 +30,10 @@ class PurchasesController < ApplicationController
       end
     end
 
+    def same_method
+      @product = Product.find(params[:product_id])
+    end
+
     def pay_item
       Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
       Payjp::Charge.create(
@@ -42,4 +44,3 @@ class PurchasesController < ApplicationController
     end
 end
 
-# address_params[:product_id]

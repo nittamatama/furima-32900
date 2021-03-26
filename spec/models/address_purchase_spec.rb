@@ -6,16 +6,17 @@ RSpec.describe AddressPurchase, type: :model do
   end
 
   describe '商品購入' do
-    context '商品出品がうまくいくとき' do
-      it 'postal_code, city, address, prefecture_id, phone_numberが存在すれば登録できる' do
+    context '商品購入がうまくいくとき' do
+      it 'postal_code, city, address, prefecture_id, phone_number,selling_price,tokenが存在すれば登録できる' do
       expect(@address).to be_valid
     end
-    it "selling_priceとtokenがあれば保存できる" do
+    it 'building_nameが空でも商品購入がうまくいく' do
+      @address.building_name = ''
       expect(@address).to be_valid
     end
-  end
+   end
 
-    context '商品出品がうまくいかないとき' do
+    context '商品購入がうまくいかないとき' do
       it 'postal_codeが空だと登録できない' do
         @address.postal_code = ''
         @address.valid?
@@ -51,6 +52,16 @@ RSpec.describe AddressPurchase, type: :model do
         @address.valid?
         expect(@address.errors.full_messages).to include("Tokenを入力してください")
       end
+      it 'user_idが空では登録できない' do
+        @address.user_id = ''
+        @address.valid?
+        expect(@address.errors.full_messages).to include("Userを入力してください")
+      end
+      it 'product_idが空では登録できない' do
+        @address.product_id = ''
+        @address.valid?
+        expect(@address.errors.full_messages).to include("Productを入力してください")
+      end 
     end
   end
 end

@@ -9,6 +9,8 @@ class AddressPurchase
     validates :prefecture_id
     validates :phone_number, format: { with: /\A\d{11}\z/, message: "電話番号にはハイフンを入れないでください"}
     validates :token
+    validates :user_id
+    validates :product_id
   end
 
   def save
