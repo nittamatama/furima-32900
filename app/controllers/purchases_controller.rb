@@ -28,6 +28,11 @@ class PurchasesController < ApplicationController
       if @user.user_id == current_user.id
          redirect_to root_path
       end
+      
+      @product = Product.find(params[:product_id])
+      if @product.purchase.present?
+        redirect_to root_path
+      end
     end
 
     def same_method
