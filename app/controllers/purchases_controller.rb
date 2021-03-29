@@ -5,10 +5,6 @@ class PurchasesController < ApplicationController
   
   def index
     @address_purchase = AddressPurchase.new
-    @product = Product.find(params[:product_id])
-      if @product.purchase.present?
-        redirect_to root_path
-      end
   end
   
   def create
@@ -31,6 +27,11 @@ class PurchasesController < ApplicationController
       @user = Product.find(params[:product_id])
       if @user.user_id == current_user.id
          redirect_to root_path
+      end
+      
+      @product = Product.find(params[:product_id])
+      if @product.purchase.present?
+        redirect_to root_path
       end
     end
 
